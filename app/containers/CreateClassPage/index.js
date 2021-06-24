@@ -1,9 +1,19 @@
 /*
  * CreateClassPage
  *
+ * Agenda
+ * 1. Present the project
+ * 2. How we can register inputs (Check repo)
+ * 3. COntroller patter using AntDesign component or custom one
+ * 4. Explore Form context and consume context
+ * 5. Access to any param using watch
+ * 6. Watch: Validate input using current form state + reset any value
+ * 7. Local error handler
+ * 8. Extra ideas: Default model and handler class
+ *
  * Testing https://react-hook-form.com/ + https://ant.design/components/switch/
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Helmet } from 'react-helmet';
 import { useForm, Controller, FormProvider } from 'react-hook-form';
@@ -28,12 +38,23 @@ export default function CreateClassPage({ talentClass }) {
     handleSubmit,
     control,
     watch,
+    setValue,
     formState: { errors },
   } = methods;
 
-  const onSubmit = data => console.log(data);
-
   const classMode = watch('classMode', model.getDefault('classMode'));
+  useEffect(() => {
+    if (classMode === 'free') setValue('price', 0);
+    if (classMode !== 'flexible') {
+      setValue('minimumPrice', 0);
+      setValue(
+        'flexibleMessage',
+        'You can choose what you want to pay for this class.',
+      );
+    }
+  }, [classMode]);
+
+  const onSubmit = data => console.log(data);
 
   return (
     <Container>
