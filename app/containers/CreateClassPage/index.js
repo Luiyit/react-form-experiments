@@ -4,7 +4,7 @@
  * Agenda
  * 1. Present the project
  * 2. How we can register inputs (Check repo)
- * 3. COntroller patter using AntDesign component or custom one
+ * 3. Controller patter using AntDesign component or custom one
  * 4. Explore Form context and consume context
  * 5. Access to any param using watch
  * 6. Watch: Validate input using current form state + reset any value
